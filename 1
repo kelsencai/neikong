@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业内部控制、风险与审计体系</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+       
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+            min-height: 100vh;
+        }
+       
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+       
+        .contact-info {
+            background-color: #ffe0b2; /* 浅橙色背景 */
+            color: #e65100; /* 深橙色文字 */
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ffcc80;
+        }
+       
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+       
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+       
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+       
+        .guides-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+       
+        .guide-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        /* 样式定义部分（省略部分重复代码以保持简洁） */
+        .guide-card.internal-audit::before {
+            background: linear-gradient(90deg, #E91E63 0%, #C2185B 100%); /* 内审颜色 */
+        }
+       
+        .guide-card h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .module-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .module-section h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        .sub-module {
+            margin-top: 30px;
+            border-top: 1px dashed #ccc;
+            padding-top: 20px;
+        }
+
+        .sub-module h3 {
+            color: #333;
+            margin-bottom: 15px;
+            cursor: pointer;
+            position: relative;
+            font-size: 1.4em;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+
+        .sub-module h3::after {
+            content: '▼';
+            position: absolute;
+            right: 15px;
+            transition: transform 0.3s;
+        }
+
+        .sub-module h3.active::after {
+            transform: rotate(180deg);
+        }
+
+        .sub-content {
+            display: none;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-left: 3px solid #1e3c72;
+        }
+
+        .link-list li {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+        
+        .link-list a {
+            color: #1e3c72;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* 表格样式 */
+        .control-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .control-table th, .control-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+
+        .control-table th {
+            background-color: #2a5298;
+            color: white;
+            font-weight: 600;
+        }
+
+        .control-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .case-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .case-list li {
+            background-color: #fce4ec; /* Light Pink for corruption */
+            border-left: 5px solid #E91E63;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+        .case-list h4 {
+            color: #C2185B;
+            margin-bottom: 5px;
+        }
+
+        .case-list a {
+            color: #E91E63;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="contact-info">
+            感兴趣请加微信交流：duducser2
+        </div>
+
+        <header>
+            <h1>企业内部控制、风险与审计体系</h1>
+            <p>构建合规运营、高效治理的基石</p>
+        </header>
+       
+        <div class="guides-container">
+            <div class="guide-card application"><h2>内控应用指引</h2><p>建立健全内部控制的指南。</p></div>
+            <div class="guide-card evaluation"><h2>内控评价指引</h2><p>自我评估内部控制有效性的标准。</p></div>
+            <div class="guide-card audit"><h2>内控审计指引</h2><p>注册会计师执行内控审计的准则。</p></div>
+            <div class="guide-card internal-audit"><h2>内部审计规范</h2><p>独立监督、评价和咨询的活动。</p></div>
+        </div>
+
+        <div class="module-section" id="internal-control">
+            <h2>内控模块：法规与实操（以原材料采购为例）</h2>
+            <div class="sub-module">
+                <h3 onclick="toggleSubContent(this)">Bible（中国相关法律法规）</h3>
+                <div class="sub-content">
+                    <p>中国企业内部控制相关法律法规主要包括：</p>
+                    <ul class="link-list">
+                        <li>
+                            《企业内部控制基本规范》<br>
+                            <a href="https://czj.sh.gov.cn/zys_8908/zcfg_8983/zcfb_8985/hj_9035/cwhjjbzdgf/20180615/0017-177776.html" target="_blank">财政部证监会等关于印发《企业内部控制基本规范》的通知 (官方链接)</a>
+                        </li>
+                        <li>
+                            《企业内部控制配套指引》 (包含应用、评价、审计指引)<br>
+                            <a href="https://www.faxin.cn/lib/zyfl/zyflcontent.aspx?gid=A49547" target="_blank">《企业内部控制配套指引》全文（用户指定链接）</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sub-module">
+                <h3 onclick="toggleSubContent(this)">如何实操 (以附件1原材料采购为例)</h3>
+                <div class="sub-content">
+                    <p>根据附件1的格式和举例，列示原材料采购流程中的关键控制要素，确保实现经营效率和资产保全目标。</p>
+                    <table class="control-table">
+                        <thead>
+                            <tr>
+                                <th>控制目标编号</th>
+                                <th>控制目标</th>
+                                <th>关键控制措施</th>
+                                <th>对应风险描述 (举例)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>14.5-CT1</td>
+                                <td>确保采购价格合理</td>
+                                <td>**14.5-CA1**：原材料采购应进行询价比价，确定合格的供应商。</td>
+                                <td>原材料采购价格不合理，导致资金使用风险。</td>
+                            </tr>
+                            <tr>
+                                <td>14.5-CT2</td>
+                                <td>确保采购的原材料符合生产需求</td>
+                                <td>**14.5-CA2**：原材料选择必须按照使用部门的实际要求和规定挑选合格的原材料。</td>
+                                <td>原材料选择不当，导致无法生产或产品质量缺陷。</td>
+                            </tr>
+                            <tr>
+                                <td>14.5-CT6</td>
+                                <td>确保采购经过适当授权审批</td>
+                                <td>**14.5-CA9**：采购合同应经过总经理审批，重大采购合同需经过董事会批准。</td>
+                                <td>未经授权的采购行为，造成资产损失或负债。</td>
+                            </tr>
+                             <tr>
+                                <td>14.5-CT9</td>
+                                <td>确保预付款得到适当审批</td>
+                                <td>**14.5-CA16**：预付款必须经过相关授权部门（财务部、总经理）审批后方可支付。</td>
+                                <td>预付款未经过审批，影响公司资金安全。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top: 15px; color: #999;">*注：上述控制目标和措施均摘自附件1《内部控制手册-14.5 原材料采购》。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-section" id="risk-management">
+            <h2>风险模块：全面风险管理体系</h2>
+            <div class="sub-module">
+                <h3 onclick="toggleSubContent(this)">法规依据与基本原则</h3>
+                <div class="sub-content">
+                    <p>企业全面风险管理依据的主要法规是国务院国资委《中央企业全面风险管理指引》。</p>
+                    <h4>基本原则：</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>**全面性及协调性原则：** 风险管理涉及全体员工，涵盖经营管理的各个领域和环节。</li>
+                        <li>**重要性与成本效益原则：** 关注重点业务领域和高风险事项，以适当成本实现有效控制。</li>
+                        <li>**谨慎性原则：** 以风险管理为导向，对重要业务领域严格以制度和程序作为运行的根本法则。</li>
+                        <li>**管业务必须管风险原则：** 集团各部门承担业务或职能领域范围内的风险管理职责。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sub-module">
+                <h3 onclick="toggleSubContent(this)">风险分类与流程 (根据附件2)</h3>
+                <div class="sub-content">
+                    <p>根据附件2（全面风险管理暂行办法）的结构，对风险进行分类和流程说明：</p>
+                    <h4>一级风险分类：</h4>
+                    <p>集团风险划分为五类一级风险：</p>
+                    <ol style="margin-left: 20px;">
+                        <li>**战略风险：** 战略定位、选择或执行不到位影响战略目标实现。</li>
+                        <li>**市场风险：** 价格、汇率、利率等市场变化影响经营目标实现。</li>
+                        <li>**财务风险：** 会计核算、资产管理、成本控制不当影响财务报告和信用评级。</li>
+                        <li>**运营风险：** 研发、采购、销售等价值链运营决策不当影响经营目标。</li>
+                        <li>**法律风险：** 未执行国家法律法规和政策规定影响合规性目标。</li>
+                    </ol>
+                    <h4>风险管理基本流程：</h4>
+                    <p>风险识别 → 风险评估 → 风险策略 → 风险应对 → 风险预警及监控 → 风险报告与监督评价。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-section" id="internal-audit-module">
+            <h2>内审模块：法规与腐败案例警示</h2>
+            <div class="sub-module">
+                <h3 onclick="toggleSubContent(this)">内审法律法规依据</h3>
+                <div class="sub-content">
+                    <ul class="link-list">
+                        <li>
+                            《中华人民共和国审计法》<br>
+                            <a href="https://sj.hit.edu.cn/2022/0228/c5841a269115/page.htm" target="_blank">《中华人民共和国审计法》 (官方链接)</a>
+                        </li>
+                        <li>
+                            《内部审计基本准则》<br>
+                            <a href="https://www.audit.gov.cn/n8/n28/c10737065/content.html" target="_blank">审计署法规司相关文件（参考链接）</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sub-module">
+                <h3 onclick="toggleSubContent(this)">发现的腐败真实案例警示</h3>
+                <div class="sub-content">
+                    <p>以下案例摘自最高检、证监会联合发布的证券违法犯罪典型案例，旨在警示内部控制缺失导致的重大财务欺诈及腐败行为：</p>
+                    <ul class="case-list">
+                        <li>
+                            <h4>案例一：欣某股份有限公司欺诈发行股票、违规披露重要信息案</h4>
+                            <p>
+                                **基本案情：** 该公司实际控制人与财务总监为达到上市目的，通过外部借款、伪造银行单据等方式，**虚构应收款项收回情况，粉饰财务数据**。上市后仍沿用前述手段，披露虚假的年度报告和半年度报告。
+                            </p>
+                            <p>
+                                **内控警示：** 财务部门缺乏独立性，关键岗位人员串通舞弊，缺乏有效的资金活动和信息披露内部控制。
+                            </p>
+                            <p>
+                                **案例链接：** <a href="https://www.spp.gov.cn/xwfbh/dxal/202011/t20201106_484214.shtml" target="_blank">最高检、证监会联合发布证券违法犯罪典型案例 (官方链接)</a>
+                            </li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 企业治理与内部控制学习资料</p>
+        </footer>
+    </div>
+
+    <script>
+        // 新增折叠功能
+        function toggleSubContent(element) {
+            const content = element.nextElementSibling;
+            const allContents = document.querySelectorAll('.sub-content');
+            const allHeaders = document.querySelectorAll('.sub-module h3');
+
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                element.classList.remove('active');
+            } else {
+                // 关闭其他所有内容
+                allContents.forEach(c => c.style.display = 'none');
+                allHeaders.forEach(h => h.classList.remove('active'));
+
+                // 打开当前内容
+                content.style.display = 'block';
+                element.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
