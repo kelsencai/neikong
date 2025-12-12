@@ -59,50 +59,16 @@
             opacity: 0.9;
         }
        
+        /* 移除 guides-container 样式，因为它现在只有三个卡片，但我们保留它以防未来扩展 */
         .guides-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: flex;
+            justify-content: space-around;
             gap: 30px;
             margin-bottom: 40px;
+            /* 隐藏所有卡片，因为它们的内容被移动到内控模块中了 */
+            display: none; 
         }
        
-        .guide-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-       
-        .guide-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        /* 样式定义部分（省略部分重复代码以保持简洁） */
-        .guide-card.internal-audit::before {
-            background: linear-gradient(90deg, #E91E63 0%, #C2185B 100%); /* 内审颜色 */
-        }
-       
-        .guide-card h2 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.8em;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
         .module-section {
             background: white;
             border-radius: 15px;
@@ -167,6 +133,19 @@
         .link-list a:hover {
             text-decoration: underline;
         }
+        
+        .list-with-descriptions li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-left: 3px solid #4CAF50;
+            background-color: #f7fff7;
+        }
+
+        .list-with-descriptions h4 {
+            color: #2a5298;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
 
         /* 表格样式 */
         .control-table {
@@ -227,29 +206,42 @@
             <p>构建合规运营、高效治理的基石</p>
         </header>
        
-        <div class="guides-container">
-            <div class="guide-card application"><h2>内控应用指引</h2><p>建立健全内部控制的指南。</p></div>
-            <div class="guide-card evaluation"><h2>内控评价指引</h2><p>自我评估内部控制有效性的标准。</p></div>
-            <div class="guide-card audit"><h2>内控审计指引</h2><p>注册会计师执行内控审计的准则。</p></div>
-            <div class="guide-card internal-audit"><h2>内部审计规范</h2><p>独立监督、评价和咨询的活动。</p></div>
-        </div>
+        <div class="guides-container"></div>
 
         <div class="module-section" id="internal-control">
-            <h2>内控模块：法规与实操（以原材料采购为例）</h2>
+            <h2>内控模块：法规、指引与实操（以原材料采购为例）</h2>
             <div class="sub-module">
-                <h3 onclick="toggleSubContent(this)">Bible（中国相关法律法规）</h3>
+                <h3 onclick="toggleSubContent(this)">法规、指引与体系核心</h3>
                 <div class="sub-content">
-                    <p>中国企业内部控制相关法律法规主要包括：</p>
+                    <h4>法规体系核心：</h4>
+                    <p>中国企业内部控制体系以“一部基本规范、三个配套指引”为核心，并与相关法律法规共同构建：</p>
                     <ul class="link-list">
                         <li>
                             《企业内部控制基本规范》<br>
                             <a href="https://czj.sh.gov.cn/zys_8908/zcfg_8983/zcfb_8985/hj_9035/cwhjjbzdgf/20180615/0017-177776.html" target="_blank">财政部证监会等关于印发《企业内部控制基本规范》的通知 (官方链接)</a>
                         </li>
                         <li>
-                            《企业内部控制配套指引》 (包含应用、评价、审计指引)<br>
+                            《企业内部控制配套指引》（包含应用、评价、审计指引）<br>
                             <a href="https://www.faxin.cn/lib/zyfl/zyflcontent.aspx?gid=A49547" target="_blank">《企业内部控制配套指引》全文（用户指定链接）</a>
                         </li>
                     </ul>
+
+                    <h4>内控三大指引说明：</h4>
+                    <ul class="list-with-descriptions">
+                        <li>
+                            <h4>应用指引（建）：</h4>
+                            <p>为企业提供**建立健全**内部控制的具体指导，涵盖了企业各项业务活动，是企业搭建内控体系的主体性文件。</p>
+                        </li>
+                        <li>
+                            <h4>评价指引（评）：</h4>
+                            <p>为企业管理层对本企业内部控制**有效性进行自我评价**提供指导，明确了评价内容、程序和报告要求。</p>
+                        </li>
+                        <li>
+                            <h4>审计指引（审）：</h4>
+                            <p>为注册会计师执行内部控制**审计业务提供执业准则**，确保外部鉴证工作的规范性和有效性。</p>
+                        </li>
+                    </ul>
+                    
                 </div>
             </div>
 
@@ -327,6 +319,7 @@
                         <li>**运营风险：** 研发、采购、销售等价值链运营决策不当影响经营目标。</li>
                         <li>**法律风险：** 未执行国家法律法规和政策规定影响合规性目标。</li>
                     </ol>
+                    
                     <h4>风险管理基本流程：</h4>
                     <p>风险识别 → 风险评估 → 风险策略 → 风险应对 → 风险预警及监控 → 风险报告与监督评价。</p>
                 </div>
